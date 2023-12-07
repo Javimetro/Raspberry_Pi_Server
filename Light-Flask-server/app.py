@@ -141,7 +141,7 @@ def registration_message_handler(decoded_message):
 
 
 # Handle messages in the test topic.
-def test_message_handler(decoded_message):
+def test_message_handler(decoded_message): ### comment test
     for key, value in decoded_message.items():
         print(f"Key: {key}, Value: {value}")
     
