@@ -12,7 +12,7 @@ def get_db_connection():
                            user='root',
                            password='Supervote50000',
                            db='votingsystem',
-                           charset='utf8mb4',
+                           charset='utf8mb4', #This setting ensures that both the client and the server are communicating using the same character encoding
                            cursorclass=pymysql.cursors.DictCursor)
 
 # Function to close an existing database connection
