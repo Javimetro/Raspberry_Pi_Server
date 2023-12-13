@@ -1,6 +1,7 @@
 
-import pymysql.cursors
-from flask import Flask, jsonify, request, current_app
+from flask import request, jsonify
+from project import app, db  # Import the Flask app and the SQLAlchemy instance
+from project.models import Vote, Topic, ESPDevice, User   # Import your models
 
 app = Flask(__name__)
 
@@ -41,5 +42,35 @@ def register_device():
     finally:
         close_db_connection(connection, cursor)
 
+
+@app.route('/submit_vote', methods=['POST'])
+def submit_vote():
+    data = request.json
+    vote_type = data.get("vote")
+    topic_id = data.get("TopicID")
+
+    if not vote_type or topic_id is None:
+        return jsonify({'error': 'Missing vote type or topic ID'}), 400
+
+    # Check if the topic exists
+    topic = Topic.query.get(topic_id)
+    if not topic:
+        return jsonify({'error': 'Topic not found'}), 404
+
+    # Create a new vote for the topic
+    new_vote = Vote(VoteType=vote_type, TopicID=topic_id, VoteTime=datetime.utcnow())
+    
+    # Add the new vote to the session and commit the transaction
+    db.session.add(new_vote)
+    db.session.commit()
+
+    return jsonify({'message': 'Vote submitted successfully'}), 201
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
