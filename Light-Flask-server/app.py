@@ -3,6 +3,17 @@ from flask_mqtt import Mqtt
 import json
 import random
 
+#Javi made
+from flask_sqlalchemy import SQLAlchemy
+from models import*
+from routes import *
+# Configuration settings for the application, e.g., database URL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+db = SQLAlchemy(app)
+
+
+###
+
 app = Flask(__name__)
 app.config["MQTT_BROKER_URL"] = "localhost"  # Replace with broker IP if not running locally.
 app.config["MQTT_BROKER_PORT"] = 1883
