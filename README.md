@@ -17,12 +17,9 @@
 
 ## Raspberry related teams
 ### Votes processing
-**Magnus / Aleksi**
+**Magnus / Aleksi / Javier**
 Basically the backend server. Handles organizing votes, receiving the votes from end-user devices, tallying and forwarding the results to any services that require them. Handles confirmation of received votes
 
-### Printer/PDF
-**Javi**
-Takes results of votes and prints them and or creates a PDF for users. (Can also support other teams)
 
 ### Display votes
 **Jefferson / Adrian / Andrea**
